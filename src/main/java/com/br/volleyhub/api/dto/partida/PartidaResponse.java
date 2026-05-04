@@ -17,5 +17,7 @@ public record PartidaResponse(
                 String phaseDescription,
                 String nomeGrupo,
                 Integer ordem,
-                StatusPartida status) {
+                StatusPartida status,
+                Long responsavelId,
+                Long ligaId) {
 }

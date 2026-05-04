@@ -47,4 +47,11 @@ public class Partida {
 
     @Enumerated(EnumType.STRING)
     private StatusPartida status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "responsavel_id")
+    private Usuario responsavel;
+
+    @Column(name = "liga_id")
+    private Long ligaId;
 }

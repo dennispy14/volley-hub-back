@@ -2,6 +2,7 @@ package com.br.volleyhub.domain.service.impl;
 
 import com.br.volleyhub.api.dto.partida.*;
 import com.br.volleyhub.api.mapper.PartidaMapper;
+import com.br.volleyhub.domain.entity.Usuario;
 import com.br.volleyhub.domain.enums.StatusPartida;
 import com.br.volleyhub.domain.repository.*;
 import com.br.volleyhub.domain.service.PartidaService;
@@ -17,6 +18,7 @@ public class PartidaServiceImpl implements PartidaService {
     private final PartidaRepository partidaRepository;
     private final TorneioRepository torneioRepository;
     private final TimeRepository timeRepository;
+    private final UsuarioRepository usuarioRepository;
     private final PartidaMapper mapper;
 
     @Override
@@ -29,9 +31,17 @@ public class PartidaServiceImpl implements PartidaService {
                 .orElseThrow(() -> new RuntimeException("Time A nÃ£o encontrado"));
 
         var timeB = timeRepository.findById(req.teamBId())
-                .orElseThrow(() -> new RuntimeException("Time B nÃ£o encontrado"));
+                .orElseThrow(() -> new RuntimeException("Time B não encontrado"));
 
-        var partida = mapper.toEntity(req, torneio, timeA, timeB);
+        Usuario responsavel = null;
+        if (req.responsavelId() != null) {
+            responsavel = usuarioRepository.findById(req.responsavelId())
+                    .orElseThrow(() -> new RuntimeException("Usuário responsável não encontrado"));
+        } else {
+            throw new RuntimeException("ID do usuário responsável é obrigatório");
+        }
+
+        var partida = mapper.toEntity(req, torneio, timeA, timeB, responsavel);
 
         return mapper.toResponse(partidaRepository.save(partida));
     }
