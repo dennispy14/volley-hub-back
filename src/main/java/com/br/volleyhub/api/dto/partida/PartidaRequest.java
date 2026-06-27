@@ -10,5 +10,7 @@ public record PartidaRequest(
                 LocalDateTime dateTime,
                 FaseTorneio phase,
                 String nomeGrupo,
-                Integer ordem) {
+                Integer ordem,
+                Long responsavelId,
+                Long ligaId) {
 }

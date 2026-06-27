@@ -6,6 +6,7 @@ import com.br.volleyhub.api.dto.partida.PartidaResultadoRequest;
 import com.br.volleyhub.domain.entity.Partida;
 import com.br.volleyhub.domain.entity.Time;
 import com.br.volleyhub.domain.entity.Torneio;
+import com.br.volleyhub.domain.entity.Usuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -24,7 +25,15 @@ public interface PartidaMapper {
     @Mapping(target = "fase", source = "request.phase")
     @Mapping(target = "nomeGrupo", source = "request.nomeGrupo")
     @Mapping(target = "ordem", source = "request.ordem")
-    Partida toEntity(PartidaRequest request, Torneio torneio, Time timeA, Time timeB);
+    @Mapping(target = "ligaId", source = "request.ligaId")
+    @Mapping(target = "responsavel", source = "responsavel")
+    @Mapping(target = "currentSet", ignore = true)
+    @Mapping(target = "setsWonA", ignore = true)
+    @Mapping(target = "setsWonB", ignore = true)
+    @Mapping(target = "config", ignore = true)
+    @Mapping(target = "sets", ignore = true)
+    @Mapping(target = "events", ignore = true)
+    Partida toEntity(PartidaRequest request, Torneio torneio, Time timeA, Time timeB, Usuario responsavel);
 
     @Mapping(target = "tournamentId", source = "torneio.id")
     @Mapping(target = "teamAId", source = "timeA.id")
@@ -36,6 +45,8 @@ public interface PartidaMapper {
     @Mapping(target = "phaseDescription", source = "fase")
     @Mapping(target = "nomeGrupo", source = "nomeGrupo")
     @Mapping(target = "ordem", source = "ordem")
+    @Mapping(target = "responsavelId", source = "responsavel.id")
+    @Mapping(target = "ligaId", source = "ligaId")
     PartidaResponse toResponse(Partida partida);
 
     @Mapping(target = "id", ignore = true)
@@ -47,6 +58,14 @@ public interface PartidaMapper {
     @Mapping(target = "nomeGrupo", ignore = true)
     @Mapping(target = "ordem", ignore = true)
     @Mapping(target = "status", ignore = true)
+    @Mapping(target = "responsavel", ignore = true)
+    @Mapping(target = "ligaId", ignore = true)
+    @Mapping(target = "currentSet", ignore = true)
+    @Mapping(target = "setsWonA", ignore = true)
+    @Mapping(target = "setsWonB", ignore = true)
+    @Mapping(target = "config", ignore = true)
+    @Mapping(target = "sets", ignore = true)
+    @Mapping(target = "events", ignore = true)
     @Mapping(target = "placarA", source = "scoreTeamA")
     @Mapping(target = "placarB", source = "scoreTeamB")
     void updateResultadoFromRequest(PartidaResultadoRequest request, @MappingTarget Partida entity);

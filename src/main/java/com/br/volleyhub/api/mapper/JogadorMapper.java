@@ -15,7 +15,7 @@ public interface JogadorMapper {
     @Mapping(target = "idade", source = "age")
     @Mapping(target = "genero", source = "gender")
     @Mapping(target = "posicao", source = "position")
-    @Mapping(target = "time.nome", source = "team")
+    @Mapping(target = "time", ignore = true)
     @Mapping(target = "imagemUrl", source = "imageUrl")
     Jogador toEntity(JogadorRequest request);
 
@@ -34,7 +34,7 @@ public interface JogadorMapper {
     @Mapping(target = "idade", source = "age")
     @Mapping(target = "genero", source = "gender")
     @Mapping(target = "posicao", source = "position")
-    @Mapping(target = "time.nome", source = "team")
+    @Mapping(target = "time", ignore = true)
     @Mapping(target = "imagemUrl", source = "imageUrl")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromRequest(JogadorRequest request, @MappingTarget Jogador entity);
