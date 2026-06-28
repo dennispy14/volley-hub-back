@@ -17,7 +17,7 @@ public class GroupConfig {
     private Long id;
 
     private Integer numberOfGroups;
+    private Integer totalTeams;
     private Integer teamsPerGroup;
     private String matchFormat;
 }
-

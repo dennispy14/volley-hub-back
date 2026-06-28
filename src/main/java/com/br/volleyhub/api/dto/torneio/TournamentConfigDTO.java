@@ -30,6 +30,7 @@ public record TournamentConfigDTO(
 
     public record GroupConfigDTO(
         Integer numberOfGroups,
+        Integer totalTeams,
         Integer teamsPerGroup,
         String matchFormat
     ) {}
