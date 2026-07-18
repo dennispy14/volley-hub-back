@@ -1,6 +1,8 @@
 package com.br.volleyhub.api.controller;
 
+import com.br.volleyhub.api.dto.partida.PartidaResponse;
 import com.br.volleyhub.api.dto.scorekeeper.*;
+import com.br.volleyhub.domain.service.PartidaService;
 import com.br.volleyhub.domain.service.ScoreKeeperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,12 @@ import java.util.List;
 public class ScoreKeeperController {
 
     private final ScoreKeeperService scoreKeeperService;
+    private final PartidaService partidaService;
+
+    @GetMapping
+    public ResponseEntity<PartidaResponse> buscarPartida(@PathVariable Long partidaId) {
+        return ResponseEntity.ok(partidaService.buscarPorId(partidaId));
+    }
 
     @PutMapping("/config")
     public ResponseEntity<ConfiguracaoPartidaResponse> criarOuAtualizarConfiguracao(

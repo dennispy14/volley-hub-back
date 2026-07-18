@@ -31,6 +31,9 @@ public class EventoPonto {
     private Equipe team;
 
     @Enumerated(EnumType.STRING)
+    private Equipe actorTeam;
+
+    @Enumerated(EnumType.STRING)
     private MotivoPonto reason;
 
     private String playerName;

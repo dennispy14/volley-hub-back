@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public record EventoPontoRequest(
         Integer setNumber,
         Equipe team,
+        Equipe actorTeam,
         MotivoPonto reason,
         String playerName,
         String observation,

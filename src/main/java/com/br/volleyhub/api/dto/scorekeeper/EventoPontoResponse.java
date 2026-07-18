@@ -10,6 +10,7 @@ public record EventoPontoResponse(
         Long partidaId,
         Integer setNumber,
         Equipe team,
+        Equipe actorTeam,
         MotivoPonto reason,
         String playerName,
         String observation,
